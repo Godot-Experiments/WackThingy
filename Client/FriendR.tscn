@@ -1,0 +1,166 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Img/FriendR/upperarm.png" type="Texture" id=1]
+[ext_resource path="res://Img/FriendR/forearm.png" type="Texture" id=2]
+[ext_resource path="res://Img/FriendR/head.png" type="Texture" id=3]
+[ext_resource path="res://Img/FriendR/body.png" type="Texture" id=4]
+[ext_resource path="res://FriendR.gd" type="Script" id=5]
+[ext_resource path="res://Img/msk.png" type="Texture" id=6]
+[ext_resource path="res://Font/font.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 28.0
+height = 8.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 7 )
+
+[node name="FriendR" type="RigidBody2D"]
+modulate = Color( 0.75, 0.75, 0.75, 1 )
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 4.0
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -22.0
+margin_top = -5.0
+margin_right = 23.0
+margin_bottom = 18.0
+color = Color( 0.513726, 0.796078, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = -24.0
+margin_top = -25.0
+margin_right = 14.0
+margin_bottom = -5.0
+color = Color( 0.513726, 0.796078, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hand" type="KinematicBody2D" parent="."]
+position = Vector2( 111, 0 )
+z_index = 1
+
+[node name="HandHitbox" type="CollisionShape2D" parent="Hand"]
+shape = SubResource( 1 )
+
+[node name="Polygons" type="Node2D" parent="."]
+position = Vector2( -17, 0 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Chest" type="Polygon2D" parent="Polygons"]
+position = Vector2( -27.5, -75.0001 )
+texture = ExtResource( 4 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( -11.4833, -15.7895, 141.148, -6.69857, 144.019, 115.311, -16.2679, 120.096 )
+uv = PoolVector2Array( -11.4833, -15.7895, 141.148, -6.69857, 144.019, 115.311, -16.2679, 120.096 )
+polygons = [ PoolIntArray( 3, 2, 1, 0 ) ]
+bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm/Forearm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm/Forearm/Wrist"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Head" type="Polygon2D" parent="Polygons"]
+position = Vector2( -72.6724, -250.086 )
+texture = ExtResource( 3 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( -22.8448, -15.0862, 213.793, -22.4138, 218.966, 213.793, -32.3276, 200.431 )
+uv = PoolVector2Array( -22.8448, -15.0862, 213.793, -22.4138, 218.966, 213.793, -32.3276, 200.431 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/Arm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm/Forearm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm/Forearm/Wrist"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Forearm" type="Polygon2D" parent="Polygons"]
+position = Vector2( 70, -55 )
+texture = ExtResource( 2 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 3.19148, -3.19149, 190.426, -4.78723, 194.149, 73.4043, -8.51064, 69.6808 )
+uv = PoolVector2Array( 3.19148, -3.19149, 190.426, -4.78723, 194.149, 73.4043, -8.51064, 69.6808 )
+polygons = [ PoolIntArray( 15, 14, 13, 12, 11, 10, 9, 8, 7, 19, 18, 17, 16 ), PoolIntArray( 0, 1, 2, 3 ) ]
+bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm/Forearm"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/Arm/Forearm/Wrist"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Arm" type="Polygon2D" parent="Polygons"]
+position = Vector2( 10, -45 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( -16.4894, -15.4255, 176.596, 1.06383, 160.106, 85.6383, -17.0213, 66.4894 )
+uv = PoolVector2Array( -16.4894, -15.4255, 176.596, 1.06383, 160.106, 85.6383, -17.0213, 66.4894 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 3, 0, 8 ), PoolIntArray( 4, 5, 6, 7, 8 ) ]
+bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/Arm/Forearm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Arm/Forearm/Wrist"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+position = Vector2( -17, 0 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Hip" type="Bone2D" parent="Skeleton2D"]
+rest = Transform2D( 1, 0, 0, 1, 0, 0 )
+default_length = 50.0
+
+[node name="Chest" type="Bone2D" parent="Skeleton2D/Hip"]
+position = Vector2( 0, -42.5 )
+rest = Transform2D( 1, 0, 0, 1, 0, -42.5 )
+
+[node name="Neck" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
+position = Vector2( -4.76837e-07, -17.5 )
+rest = Transform2D( 1, 0, 0, 1, -4.76837e-07, -17.5 )
+
+[node name="Arm" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
+position = Vector2( 7.62939e-06, 7.5 )
+rotation = 0.916791
+rest = Transform2D( 1, 0, 0, 1, 32.5, 25 )
+default_length = 50.0
+
+[node name="Forearm" type="Bone2D" parent="Skeleton2D/Hip/Chest/Arm"]
+position = Vector2( 122.5, 2.5 )
+rotation = -1.77438
+rest = Transform2D( 1, 0, 0, 1, 60, 0 )
+
+[node name="Wrist" type="Bone2D" parent="Skeleton2D/Hip/Chest/Arm/Forearm"]
+position = Vector2( 82.5, 10 )
+rest = Transform2D( 1, 0, 0, 1, 82.5, 10 )
+
+[node name="HeadArea" type="Area2D" parent="."]
+position = Vector2( -2, -53 )
+
+[node name="HeadHitbox" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2( -4, -4 )
+shape = SubResource( 2 )
+
+[node name="HeadImg" type="Polygon2D" parent="HeadArea"]
+visible = false
+position = Vector2( 2, 3 )
+polygon = PoolVector2Array( -63.705, 2.8484, -46.705, -49.1516, 15.295, -62.1516, 60.295, -20.1516, 52.295, 31.8484, 3.295, 60.8484, -42.705, 49.8484 )
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2( -21, -17 )
+current = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Record" type="Label" parent="UI"]
+margin_left = 692.0
+margin_top = 329.0
+margin_right = 844.0
+margin_bottom = 361.0
+custom_fonts/font = SubResource( 3 )
+text = "asdfasdf"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BodyHitbox" type="CollisionPolygon2D" parent="."]
+position = Vector2( -13, 8 )
+polygon = PoolVector2Array( 3, 10, -10, -17, -3, -39, -14, -44, -21, -58, -18, -70, -12, -87, 5, -95, 22, -92, 32, -80, 34, -70, 34, -55, 28, -43, 20, -35, 28, -25, 34, -15, 18, 10 )
+
+[node name="Light" type="Light2D" parent="."]
+texture = ExtResource( 6 )
+texture_scale = 24.0
+color = Color( 0.382477, 0.589844, 0.589844, 1 )
+energy = 1.25
+shadow_enabled = true
+[connection signal="area_entered" from="HeadArea" to="." method="_on_HeadArea_area_entered"]
+[connection signal="body_entered" from="HeadArea" to="." method="_on_HeadArea_body_entered"]
