@@ -1,7 +1,7 @@
 extends Control
 
-onready var status = get_node("VBox/Status")
-
+onready var status = $BG/VBox/Status
+onready var join_button = $BG/VBox/JoinButton
 
 func _ready():
 	gamestate.connect("connection_failed", self, "_on_connection_failed")
@@ -9,7 +9,7 @@ func _ready():
 	gamestate.connect("server_disconnected", self, "_on_server_disconnect")
 	gamestate.connect("players_updated", self, "update_players_list")
 	
-	$VBox/JoinButton.disabled = true
+	join_button.disabled = true
 	
 	status.text = "Connecting..."
 	status.modulate = Color.yellow
@@ -21,21 +21,21 @@ func _on_JoinButton_pressed():
 
 
 func _on_connection_success():
-	$VBox/JoinButton.disabled = false
+	join_button.disabled = false
 	
 	status.text = "Connected"
 	status.modulate = Color.green
 
 
 func _on_connection_failed():
-	$VBox/JoinButton.disabled = true
+	join_button.disabled = true
 	
 	status.text = "Connection Failed, trying again"
 	status.modulate = Color.red
 
 
 func _on_server_disconnect():
-	$VBox/JoinButton.disabled = true
+	join_button.disabled = true
 	
 	status.text = "Server Disconnected, trying to connect..."
 	status.modulate = Color.red
