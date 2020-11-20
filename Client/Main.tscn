@@ -1,8 +1,32 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Img/largemess.jpeg" type="Texture" id=2]
 [ext_resource path="res://Font/font.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 0.501961 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 0.501961 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.639216, 0.796078, 0.694118, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.639216, 0.796078, 0.694118, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.15, 0.15, 0.15, 1 )
@@ -46,9 +70,9 @@ Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = null
+Button/styles/disabled = SubResource( 7 )
 Button/styles/focus = null
-Button/styles/hover = null
+Button/styles/hover = SubResource( 6 )
 Button/styles/normal = SubResource( 4 )
 Button/styles/pressed = null
 LineEdit/colors/clear_button_color = Color( 0.88, 0.88, 0.88, 1 )
@@ -99,17 +123,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -82.0
-margin_top = -190.0
-margin_right = 82.0
-margin_bottom = 190.0
+margin_left = -157.0
+margin_top = -198.0
+margin_right = 157.0
+margin_bottom = 198.0
 custom_constants/separation = 100
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="BG/VBox"]
-margin_right = 186.0
+margin_right = 314.0
 margin_bottom = 16.0
 text = "Client"
 align = 1
@@ -117,7 +141,7 @@ valign = 1
 
 [node name="HBox" type="HBoxContainer" parent="BG/VBox"]
 margin_top = 116.0
-margin_right = 186.0
+margin_right = 314.0
 margin_bottom = 148.0
 
 [node name="NameLabel" type="Label" parent="BG/VBox/HBox"]
@@ -128,20 +152,23 @@ text = "Name: "
 
 [node name="LineEdit" type="LineEdit" parent="BG/VBox/HBox"]
 margin_left = 58.0
-margin_right = 170.0
+margin_right = 314.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 256, 0 )
 text = "Player"
 
 [node name="JoinButton" type="Button" parent="BG/VBox"]
-margin_left = 68.0
+margin_left = 132.0
 margin_top = 248.0
-margin_right = 118.0
+margin_right = 182.0
 margin_bottom = 280.0
 size_flags_horizontal = 4
 text = "Join"
 
 [node name="Status" type="Label" parent="BG/VBox"]
 margin_top = 380.0
-margin_right = 186.0
+margin_right = 314.0
 margin_bottom = 396.0
+rect_min_size = Vector2( 300, 0 )
+align = 1
 [connection signal="pressed" from="BG/VBox/JoinButton" to="." method="_on_JoinButton_pressed"]
