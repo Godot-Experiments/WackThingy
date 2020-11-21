@@ -5,7 +5,7 @@ extends StaticBody2D
 # var a = 2
 # var b = "text"
 
-const SIZE := 1024
+const SIZE := 2048
 const SIZE_Y := 128
 # Called when the node enters the scene tree for the first time.
 func _ready():

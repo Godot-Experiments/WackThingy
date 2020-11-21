@@ -1,12 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Img/FrenR/upperarm.png" type="Texture" id=1]
 [ext_resource path="res://Img/FrenR/forearm.png" type="Texture" id=2]
 [ext_resource path="res://Img/FrenR/head.png" type="Texture" id=3]
 [ext_resource path="res://Img/FrenR/body.png" type="Texture" id=4]
-[ext_resource path="res://FrenR.gd" type="Script" id=5]
+[ext_resource path="res://Scn/Archive/FrenR.gd" type="Script" id=5]
 [ext_resource path="res://Img/msk.png" type="Texture" id=6]
 [ext_resource path="res://Font/font.ttf" type="DynamicFontData" id=7]
+
+
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 21.8169
+
+[sub_resource type="CapsuleShape2D" id=6]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 27, 10 )
@@ -113,17 +120,30 @@ position = Vector2( -4.76837e-07, -17.5 )
 rest = Transform2D( 1, 0, 0, 1, -4.76837e-07, -17.5 )
 
 [node name="Arm" type="Bone2D" parent="Skeleton2D/Hip/Chest"]
-position = Vector2( -60, 10.255 )
+position = Vector2( -40, 7.755 )
+rotation = 7.27913
 rest = Transform2D( 1, 0, 0, 1, -7.77159, 12.2558 )
 default_length = 50.0
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
 
 [node name="Forearm" type="Bone2D" parent="Skeleton2D/Hip/Chest/Arm"]
 position = Vector2( 108.938, 0.509768 )
+rotation = -1.57866
 rest = Transform2D( 1, 0, 0, 1, 60, 0 )
+__meta__ = {
+"_edit_bone_": true
+}
 
 [node name="Wrist" type="Bone2D" parent="Skeleton2D/Hip/Chest/Arm/Forearm"]
 position = Vector2( 82.5, 10 )
+rotation = 0.265948
 rest = Transform2D( 1, 0, 0, 1, 82.5, 10 )
+__meta__ = {
+"_edit_bone_": true
+}
 
 [node name="Hand" type="KinematicBody2D" parent="."]
 position = Vector2( -16.4934, -0.255127 )
@@ -131,9 +151,9 @@ z_index = 1
 collision_layer = 4
 collision_mask = 0
 
-[node name="HandHitbox" type="CollisionShape2D" parent="Hand"]
+[node name="Hitbox" type="CollisionShape2D" parent="Hand"]
 position = Vector2( 26.6765, 0.611717 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Hand2" type="KinematicBody2D" parent="Hand"]
 position = Vector2( 53.0158, -2.65079 )
@@ -141,7 +161,28 @@ z_index = 1
 collision_layer = 4
 collision_mask = 0
 
-[node name="HandHitbox2" type="CollisionShape2D" parent="Hand/Hand2"]
+[node name="Hitbox" type="CollisionShape2D" parent="Hand/Hand2"]
+position = Vector2( 26.6765, 0.611717 )
+shape = SubResource( 6 )
+
+[node name="HandR" type="KinematicBody2D" parent="."]
+visible = false
+position = Vector2( 20, -1 )
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+
+[node name="Hitbox" type="CollisionShape2D" parent="HandR"]
+position = Vector2( 26.6765, 0.611717 )
+shape = SubResource( 4 )
+
+[node name="HandR2" type="KinematicBody2D" parent="HandR"]
+position = Vector2( 53.0158, -2.65079 )
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+
+[node name="Hitbox" type="CollisionShape2D" parent="HandR/HandR2"]
 position = Vector2( 26.6765, 0.611717 )
 shape = SubResource( 4 )
 
@@ -152,7 +193,6 @@ position = Vector2( -3.5, -44 )
 shape = SubResource( 2 )
 
 [node name="Cam" type="Camera2D" parent="."]
-position = Vector2( -18.7996, -5.10205 )
 offset = Vector2( 0, -128 )
 current = true
 
@@ -174,7 +214,6 @@ position = Vector2( 0, 19.898 )
 polygon = PoolVector2Array( -11, 10.102, -19, -12.898, -13, -31.898, -19, -38.898, -28, -52.898, -30, -72.898, -21, -87.898, -2, -94.898, 17, -85.898, 24, -65.898, 19, -45.898, 7, -31.898, 15, -12.898, 9, 10.102 )
 
 [node name="Light" type="Light2D" parent="."]
-position = Vector2( 2.20038, 11.8979 )
 texture = ExtResource( 6 )
 texture_scale = 8.0
 color = Color( 0.382477, 0.589844, 0.589844, 1 )

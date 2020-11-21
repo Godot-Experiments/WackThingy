@@ -2,6 +2,8 @@ extends Control
 
 onready var status = $Login/Panel/VBox/Status
 onready var join_button = $Login/Panel/VBox/JoinButton
+onready var name_edit = $Login/Panel/VBox/HBox/NameEdit
+onready var panel = $Login/Panel
 
 func _ready():
 	gamestate.connect("connection_failed", self, "_on_connection_failed")
@@ -16,9 +18,16 @@ func _ready():
 
 
 func _on_JoinButton_pressed():
-	gamestate.my_name = $VBox/HBox/LineEdit.text
+	gamestate.my_name = name_edit.text
 	gamestate.pre_start_game()
 
+func show() -> void:
+	.show()
+	panel.show()
+
+func hide() -> void:
+	.hide()
+	panel.hide()
 
 func _on_connection_success():
 	join_button.disabled = false

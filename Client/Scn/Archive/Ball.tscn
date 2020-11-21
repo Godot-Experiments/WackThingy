@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Ball.gd" type="Script" id=1]
-[ext_resource path="res://Img/ball.png" type="Texture" id=2]
-[ext_resource path="res://Img/ballwink.png" type="Texture" id=3]
+[ext_resource path="res://Scn/Archive/Ball.gd" type="Script" id=1]
+[ext_resource path="res://Img/ballwink.png" type="Texture" id=2]
+[ext_resource path="res://Img/ball.png" type="Texture" id=3]
 [ext_resource path="res://Scn/FX/Splat.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -13,12 +13,12 @@ polygon = PoolVector2Array( -17.5711, -15.8864, -10.1309, -21.2975, 3.8026, -23.
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "wink",
 "speed": 5.0

@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scn/Archive/WorldOld.gd" type="Script" id=1]
+[ext_resource path="res://Img/bg.jpg" type="Texture" id=2]
+[ext_resource path="res://Scn/Level/Spawn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scn/FrenR/FrenR.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scn/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Wall.tscn" type="PackedScene" id=6]
+
+
+
+
+[sub_resource type="Environment" id=1]
+glow_enabled = true
+glow_blend_mode = 1
+glow_bicubic_upscale = true
+
+[node name="World" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Wall" parent="." instance=ExtResource( 6 )]
+
+[node name="Wall2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3269.05, -902.919 )
+scale = Vector2( 0.5, 1 )
+
+[node name="Wall3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4180.02, 469.14 )
+rotation = -0.53317
+scale = Vector2( 0.5, 1 )
+
+[node name="Wall4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 6311.13, -902.304 )
+rotation = 0.548454
+scale = Vector2( 0.5, 1 )
+
+[node name="Wall5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 8425.06, 228.972 )
+rotation = 0.173245
+scale = Vector2( 0.5, 1 )
+
+[node name="Wall6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 11908.8, 613.462 )
+scale = Vector2( 0.5, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="FrenR" parent="." instance=ExtResource( 4 )]
+position = Vector2( -817.989, -310.911 )
+
+[node name="bg" type="Sprite" parent="FrenR"]
+position = Vector2( 359.269, 222.535 )
+scale = Vector2( 9266.39, 6902.12 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( -1213.42, -560.83 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 5550.74, -2243.93 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 6398.7, -66.0955 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 5 )]
+position = Vector2( -1390.03, -1715.21 )
+
+[node name="Spawn" parent="." instance=ExtResource( 3 )]
+extent = 700

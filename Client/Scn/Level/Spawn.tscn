@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scn/Level/Spawn.gd" type="Script" id=1]
+
+[node name="Spawn" type="Position2D"]
+position = Vector2( -823.934, -545.064 )
+script = ExtResource( 1 )

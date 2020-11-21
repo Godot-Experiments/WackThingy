@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scn/FrenR/FrenRK.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="FrenRK" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Cam" type="Camera2D" parent="."]
+offset = Vector2( 0, -100 )
+process_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+rect_pivot_offset = Vector2( 10, 10 )
+color = Color( 0.0705882, 0.490196, 0.309804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

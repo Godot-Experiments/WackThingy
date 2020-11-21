@@ -1,100 +1,39 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
-[ext_resource path="res://Goal.gd" type="Script" id=2]
-[ext_resource path="res://Scn/FX/Splat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Img/bg.jpg" type="Texture" id=2]
+[ext_resource path="res://Scn/Level/Spawn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scn/FrenR/FrenRK.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Wall.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Ball.tscn" type="PackedScene" id=7]
-[ext_resource path="res://FrenR.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
+background_mode = 4
 glow_enabled = true
 glow_blend_mode = 1
+glow_hdr_threshold = 0.9
+glow_hdr_luminance_cap = 1.0
 glow_bicubic_upscale = true
-
-[sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 1, 0, 0, 1, 0, 0.115234, 1, 1 )
-
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
-
-[sub_resource type="Curve" id=4]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
-
-[sub_resource type="ParticlesMaterial" id=6]
-emission_shape = 2
-emission_box_extents = Vector3( 10, 10, 0 )
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
-spread = 180.0
-gravity = Vector3( 0, 128, 0 )
-initial_velocity = 128.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 8.0
-scale_random = 1.0
-scale_curve = SubResource( 5 )
-color_ramp = SubResource( 3 )
-hue_variation = 1.0
-hue_variation_random = 1.0
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 850, 4 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="BG" type="ColorRect" parent="."]
-margin_left = -5280.0
-margin_top = -5688.0
-margin_right = 5796.0
-margin_bottom = 3081.0
-color = Color( 0.113725, 0.439216, 0.439216, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Wall" parent="." instance=ExtResource( 6 )]
-
-[node name="Wall2" parent="." instance=ExtResource( 6 )]
-position = Vector2( -2048, -2048 )
-rotation = 1.5708
-
-[node name="Wall3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, -4096 )
-
-[node name="Wall4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 2048, -2048 )
-rotation = 1.5708
-
-[node name="Wall5" parent="." instance=ExtResource( 6 )]
-position = Vector2( 178.135, -156.836 )
-rotation = 1.5708
-scale = Vector2( 0.2, 0.5 )
-
-[node name="Ball" parent="." instance=ExtResource( 7 )]
-position = Vector2( -393.07, -674.191 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
+[node name="FrenRK" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1.2, 1.5, 1.1, 1 )
+ctrl = true
+
 [node name="Players" type="Node2D" parent="."]
 
-[node name="FrenR" parent="Players" instance=ExtResource( 8 )]
-position = Vector2( -679.559, -415.209 )
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( -458.72, -88.376 )
+scale = Vector2( 9266.39, 6902.12 )
+z_index = -2
+texture = ExtResource( 2 )
 
-[node name="Goal" type="Area2D" parent="."]
-position = Vector2( 1083.23, -131.48 )
-script = ExtResource( 2 )
+[node name="Spawn" parent="." instance=ExtResource( 3 )]
 
-[node name="Splat" parent="Goal" instance=ExtResource( 3 )]
-emitting = false
-one_shot = true
-process_material = SubResource( 6 )
-
-[node name="Hitbox" type="CollisionShape2D" parent="Goal"]
-shape = SubResource( 7 )
+[node name="Wall" parent="." instance=ExtResource( 6 )]
+position = Vector2( -48.2219, 752.918 )
+scale = Vector2( 1, 0.2 )
