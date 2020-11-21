@@ -1,7 +1,7 @@
 extends Control
 
-onready var status = $BG/VBox/Status
-onready var join_button = $BG/VBox/JoinButton
+onready var status = $Login/Panel/VBox/Status
+onready var join_button = $Login/Panel/VBox/JoinButton
 
 func _ready():
 	gamestate.connect("connection_failed", self, "_on_connection_failed")

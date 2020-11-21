@@ -1,110 +1,33 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://Img/largemess.jpeg" type="Texture" id=2]
-[ext_resource path="res://Font/font.ttf" type="DynamicFontData" id=3]
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0, 0, 0, 0.501961 )
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color( 0, 0, 0, 0.501961 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.639216, 0.796078, 0.694118, 1 )
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color( 0.639216, 0.796078, 0.694118, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.15, 0.15, 0.15, 1 )
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color( 0.15, 0.15, 0.15, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color( 0.14902, 0.14902, 0.14902, 1 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.117647, 0.117647, 0.117647, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 3 )
-
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
-Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = null
-Button/styles/disabled = SubResource( 7 )
-Button/styles/focus = null
-Button/styles/hover = SubResource( 6 )
-Button/styles/normal = SubResource( 4 )
-Button/styles/pressed = null
-LineEdit/colors/clear_button_color = Color( 0.88, 0.88, 0.88, 1 )
-LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
-LineEdit/colors/cursor_color = Color( 0.94, 0.94, 0.94, 1 )
-LineEdit/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
-LineEdit/colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 0.5 )
-LineEdit/colors/selection_color = Color( 0.49, 0.49, 0.49, 1 )
-LineEdit/constants/minimum_spaces = 12
-LineEdit/fonts/font = null
-LineEdit/icons/clear = null
-LineEdit/styles/focus = null
-LineEdit/styles/normal = SubResource( 5 )
-LineEdit/styles/read_only = null
-Panel/styles/panel = SubResource( 3 )
+[ext_resource path="res://Img/largemess.png" type="Texture" id=2]
+[ext_resource path="res://Theme/MenuTheme.tres" type="Theme" id=3]
+[ext_resource path="res://MenuCam.gd" type="Script" id=4]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 2 )
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="largemess" type="Sprite" parent="."]
-position = Vector2( 804.245, 463.005 )
-scale = Vector2( 0.802793, 0.802793 )
 texture = ExtResource( 2 )
 
-[node name="BG" type="Panel" parent="."]
+[node name="MenuCam" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 4 )
+
+[node name="Duration" type="Timer" parent="MenuCam"]
+process_mode = 0
+one_shot = true
+
+[node name="Login" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Login"]
 self_modulate = Color( 1, 1, 1, 0.564706 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -114,11 +37,12 @@ margin_left = -211.0
 margin_top = -221.0
 margin_right = 211.0
 margin_bottom = 221.0
+theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="BG"]
+[node name="VBox" type="VBoxContainer" parent="Login/Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -132,32 +56,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="BG/VBox"]
+[node name="Title" type="Label" parent="Login/Panel/VBox"]
 margin_right = 314.0
 margin_bottom = 16.0
-text = "Client"
+text = "Wack Thingy!"
 align = 1
 valign = 1
 
-[node name="HBox" type="HBoxContainer" parent="BG/VBox"]
+[node name="HBox" type="HBoxContainer" parent="Login/Panel/VBox"]
 margin_top = 116.0
 margin_right = 314.0
 margin_bottom = 148.0
 
-[node name="NameLabel" type="Label" parent="BG/VBox/HBox"]
+[node name="NameLabel" type="Label" parent="Login/Panel/VBox/HBox"]
 margin_top = 8.0
 margin_right = 54.0
 margin_bottom = 24.0
 text = "Name: "
 
-[node name="LineEdit" type="LineEdit" parent="BG/VBox/HBox"]
+[node name="LineEdit" type="LineEdit" parent="Login/Panel/VBox/HBox"]
 margin_left = 58.0
 margin_right = 314.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 256, 0 )
 text = "Player"
 
-[node name="JoinButton" type="Button" parent="BG/VBox"]
+[node name="JoinButton" type="Button" parent="Login/Panel/VBox"]
 margin_left = 132.0
 margin_top = 248.0
 margin_right = 182.0
@@ -165,10 +89,10 @@ margin_bottom = 280.0
 size_flags_horizontal = 4
 text = "Join"
 
-[node name="Status" type="Label" parent="BG/VBox"]
+[node name="Status" type="Label" parent="Login/Panel/VBox"]
 margin_top = 380.0
 margin_right = 314.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 300, 0 )
 align = 1
-[connection signal="pressed" from="BG/VBox/JoinButton" to="." method="_on_JoinButton_pressed"]
+[connection signal="pressed" from="Login/Panel/VBox/JoinButton" to="." method="_on_JoinButton_pressed"]
