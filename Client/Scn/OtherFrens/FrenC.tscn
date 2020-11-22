@@ -1,5 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scn/FrenR/FrenRK.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scn/OtherFrens/FrenNa.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Img/IdiotCreator/body.png" type="Texture" id=2]
+[ext_resource path="res://Img/IdiotCreator/Idiot.png" type="Texture" id=3]
+[ext_resource path="res://Img/IdiotCreator/upperarm.png" type="Texture" id=4]
+[ext_resource path="res://Img/IdiotCreator/forearm.png" type="Texture" id=5]
 
 [node name="FrenC" instance=ExtResource( 1 )]
+
+[node name="body" parent="." index="1"]
+position = Vector2( -11.0926, 7.27897 )
+rotation = -0.0855119
+texture = ExtResource( 2 )
+
+[node name="head" parent="body" index="0"]
+texture = ExtResource( 3 )
+
+[node name="Upperarm" parent="." index="2"]
+texture = ExtResource( 4 )
+
+[node name="Forearm" parent="Upperarm" index="0"]
+texture = ExtResource( 5 )
+
+[node name="HeadArea" parent="." index="4"]
+position = Vector2( 3.71208, -58.4538 )
