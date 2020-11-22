@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const respawn_ui := preload("res://Scn/Respawn.tscn")
+
 const WALK_FORCE = 600
 const WALK_MAX_SPEED = 800
 const JUMP_SPEED = 1600
@@ -49,9 +51,10 @@ func dmg(d: int):
 		if hp <= 0:
 			rpc("die")
 
-const respawn_ui := preload("res://Scn/Respawn.tscn")
+
 remotesync func die():
-	get_node("/root").add_child(respawn_ui.instance())
+	if is_network_master():
+		get_node("/root").add_child(respawn_ui.instance())
 	queue_free()
 
 remote func w(wa: int):

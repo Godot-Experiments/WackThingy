@@ -12,4 +12,5 @@ func _on_Respawn_timeout():
 			pos += Vector2(500, 0)
 		get_parent().rpc("spawn_player", pos, pid)
 		print("RESPAWNING")
+	queue_free()
 
