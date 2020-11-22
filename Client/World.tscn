@@ -25,8 +25,8 @@ texture = ExtResource( 4 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="bg" type="Sprite" parent="."]
-position = Vector2( -458.72, -88.376 )
-scale = Vector2( 9266.39, 6902.12 )
+position = Vector2( -483.378, 182.871 )
+scale = Vector2( 37328.2, 23719.5 )
 z_index = -2
 texture = ExtResource( 2 )
 
@@ -45,12 +45,7 @@ rotation = -0.54024
 scale = Vector2( 1, 0.4 )
 
 [node name="Dark" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="Timer" type="Timer" parent="."]
-process_mode = 0
-wait_time = 2.0
-autostart = true
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

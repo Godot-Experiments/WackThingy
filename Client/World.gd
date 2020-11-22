@@ -27,6 +27,8 @@ puppet func remove_player(id):
 onready var dark: CanvasModulate = $Dark
 var colors := [Color("242424"), Color.white, Color.black]
 
-func _on_Timer_timeout():
-	$Tween.interpolate_property(dark, "color", dark.color, colors[randi() % 3], 2)
+remote func d(c: int) -> void:
+	# changes lighting
+	print(c)
+	$Tween.interpolate_property(dark, "color", dark.color, colors[c], 2)
 	$Tween.start()

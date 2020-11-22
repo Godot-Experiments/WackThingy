@@ -78,8 +78,9 @@ func flip_left(left: bool):
 remote func fl(left: bool) -> void:
 	flip_left(left)
 
-func _physics_process(delta):
+export var extents = 1000
 
+func _physics_process(delta):
 	if ctrl and (Input.is_action_just_pressed("ui_right")
 			or Input.is_action_just_pressed("ui_left") 
 			or Input.is_action_just_released("ui_left") 
@@ -113,20 +114,22 @@ func _physics_process(delta):
 	# Apply gravity.
 	velocity.y += gravity + d
 
-
 	# Move based on the velocity and snap to the ground.
 	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
 #	velocity = move_and_slide(velocity)
 
 	# is_on_floor() must be called after movement code.
-	if is_on_floor():
-		num_jumps = MAX_JUMPS
-
-	if ctrl and Input.is_action_just_pressed("ui_up") and num_jumps >= 1:
-		jump()
-		for id in gamestate.players:
-			rpc_id(id, "jump")
-		num_jumps -= 1
+	if ctrl:
+		if position.y >= extents:
+			rpc("die")
+		if is_on_floor():
+			num_jumps = MAX_JUMPS
+	
+		if Input.is_action_just_pressed("ui_up") and num_jumps >= 1:
+			jump()
+			for id in gamestate.players:
+				rpc_id(id, "jump")
+			num_jumps -= 1
 	
 	chk_hand_input()
 

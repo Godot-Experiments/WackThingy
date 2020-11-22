@@ -74,8 +74,9 @@ remote func populate_world():
 	if players[caller_id][1] == 1:
 		pos += Vector2(500, 0)
 	world.rpc("spawn_player", pos, caller_id)
+	world.rpc_id(caller_id, "d", world.color)
 
 
 # Return random 2D vector inside bounds 0, 0, bound_x, bound_y
-func random_vector2(bound_x, bound_y) -> Vector2:
+static func random_vector2(bound_x, bound_y) -> Vector2:
 	return Vector2(randf() * bound_x, randf() * bound_y)
