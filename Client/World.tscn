@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Img/bg.jpg" type="Texture" id=2]
 [ext_resource path="res://Scn/Level/Box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Img/ball.png" type="Texture" id=4]
+[ext_resource path="res://Img/ballwink.png" type="Texture" id=5]
 [ext_resource path="res://Wall.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
@@ -20,8 +21,12 @@ script = ExtResource( 1 )
 environment = SubResource( 1 )
 
 [node name="ball" type="Sprite" parent="."]
-position = Vector2( -9.24207, 488.827 )
+position = Vector2( 1132.67, 77.2081 )
 texture = ExtResource( 4 )
+
+[node name="ballwink" type="Sprite" parent="ball"]
+position = Vector2( 93.9503, -1297.06 )
+texture = ExtResource( 5 )
 
 [node name="Players" type="Node2D" parent="."]
 
@@ -74,6 +79,11 @@ scale = Vector2( 0.4, 0.542 )
 position = Vector2( 2367.34, -1285.88 )
 rotation = 0.191013
 scale = Vector2( 0.296631, 0.691959 )
+
+[node name="Wall13" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1156.01, -878.836 )
+rotation = -0.022342
+scale = Vector2( 0.101171, 0.444902 )
 
 [node name="Wall8" parent="." instance=ExtResource( 6 )]
 position = Vector2( 3650.98, -521.292 )

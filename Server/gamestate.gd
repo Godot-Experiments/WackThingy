@@ -70,12 +70,13 @@ remote func populate_world():
 		world.rpc_id(caller_id, "spawn_player", player.position, player.get_network_master())
 	
 	# Spawn new player everywhere
-	var pos := random_vector2(500, 500)
+	var pos := random_vector2(500, 0)
 	match players[caller_id][1]:
 		1:
 			pos += enemy_offset
 		2:
 			pos += enemy_offset / 2
+			pos.y -= 3800
 	world.rpc("spawn_player", pos, caller_id)
 	world.rpc_id(caller_id, "d", world.color)
 

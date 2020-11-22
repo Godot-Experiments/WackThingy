@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scn/FrenR/FrenRK.gd" type="Script" id=1]
 [ext_resource path="res://Font/font.ttf" type="DynamicFontData" id=2]
@@ -8,9 +8,10 @@
 [ext_resource path="res://Img/FrenR/body.png" type="Texture" id=6]
 [ext_resource path="res://Img/FriendR/head.png" type="Texture" id=7]
 [ext_resource path="res://Theme/MenuTheme.tres" type="Theme" id=8]
+[ext_resource path="res://Scn/FrenR/HeadArea.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 28.0
+radius = 35.1802
 height = 8.0
 
 [sub_resource type="CanvasItemMaterial" id=2]
@@ -110,15 +111,20 @@ __meta__ = {
 
 [node name="BodyHitbox" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0, 19.898 )
-polygon = PoolVector2Array( -18, -12.898, -13, -31.898, -19, -38.898, -26, -53.898, -28, -72.898, -21, -87.898, -2, -94.898, 17, -85.898, 21, -64.898, 19, -45.898, 11, -31.898, 17, -12.898, 22.2442, 32.7055, 12.5306, 61.4313, -8.27637, 61.2853, -21.3058, 32.9829 )
+polygon = PoolVector2Array( -18, -12.898, -13, -31.898, -19.5403, -57.927, -19.8251, -83.131, 15.8963, -83.226, 15.9161, -57.4998, 11, -31.898, 17, -12.898, 22.2442, 32.7055, 12.5306, 61.4313, -8.27637, 61.2853, -21.3058, 32.9829 )
 
 [node name="HeadArea" type="Area2D" parent="."]
 position = Vector2( -3.5, -44 )
+monitoring = false
+collision_layer = 7
+collision_mask = 0
+script = ExtResource( 9 )
 
 [node name="HeadHitbox" type="CollisionShape2D" parent="HeadArea"]
 shape = SubResource( 1 )
 
 [node name="UI" type="Node2D" parent="."]
+z_index = 4
 
 [node name="Health" type="ProgressBar" parent="UI"]
 material = SubResource( 2 )

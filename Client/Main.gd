@@ -21,7 +21,7 @@ func _ready():
 	team.add_item("Save the sHEK", 1)
 	team.add_item("EVERYTHING MUST BURN", 2)
 	_on_Team_item_selected(0)
-	chara.add_item("Duhee", 0)
+	chara.add_item("Doohee", 0)
 	chara.add_item("Shecc", 1)
 	chara.add_item("Ban", 2)
 	chara.add_item("Kreme", 3)

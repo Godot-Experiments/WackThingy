@@ -84,6 +84,7 @@ puppet func pre_start_game():
 
 
 const DAMAGEABLE:= "0"
+const HEADS := "1"
 var colors: PoolColorArray = [Color("ff007e"), Color("007cff"), Color("af00ff"), Color("00ffdb"), Color("00ff16"), Color("85ff00"), Color("ffcb00"), Color("fe2b2b")]
 var color_size = colors.size()
 var light: int = 1

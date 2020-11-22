@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scn/FX/Splat.gd" type="Script" id=1]
 [ext_resource path="res://Img/light.png" type="Texture" id=2]
@@ -33,43 +33,15 @@ color_ramp = SubResource( 2 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 
-[sub_resource type="Gradient" id=6]
-colors = PoolColorArray( 0.180392, 0.180392, 0.180392, 1, 0.606445, 0.606445, 0.606445, 0 )
-
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
-
-[sub_resource type="ParticlesMaterial" id=8]
-emission_shape = 2
-emission_box_extents = Vector3( 10, 10, 0 )
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 128.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 5.0
-scale_random = 1.0
-color_ramp = SubResource( 7 )
-
 [node name="Splat" type="Particles2D"]
 modulate = Color( 1.42, 1.42, 1.42, 1 )
-scale = Vector2( 1.25, 1.25 )
 emitting = false
-amount = 128
+amount = 96
 one_shot = true
 speed_scale = 1.5
 explosiveness = 0.95
 process_material = SubResource( 5 )
 script = ExtResource( 1 )
-
-[node name="Dust" type="Particles2D" parent="."]
-emitting = false
-amount = 42
-one_shot = true
-explosiveness = 0.95
-process_material = SubResource( 8 )
 
 [node name="Light" type="Light2D" parent="."]
 texture = ExtResource( 2 )

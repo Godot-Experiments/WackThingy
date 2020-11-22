@@ -3,9 +3,10 @@ extends Area2D
 const SPEED = 20
 var vel: Vector2
 #var possible: Array = [preload("res://Img/Laser/laser.png"), preload("res://Img/Laser/laser2.png"), preload("res://Img/Laser/laser3.png")]
-export var dmg:= 1
+export var dmg := 1
 var par
 var team
+var hp := 1
 const splat := preload("res://Scn/FX/Splat.tscn")
 func _ready():
 	$Light.energy = gamestate.laser_light
@@ -20,17 +21,21 @@ func _physics_process(_delta):
 	position += vel
 
 func _on_Laser_body_entered(body):
-	if body.is_in_group(gamestate.DAMAGEABLE) and team != body.team:
+	if hp >= 1 and body.is_in_group(gamestate.DAMAGEABLE) and team != body.team:
 		body.dmg(dmg)
+		hp -= 1
 		spawn_splat()
 		queue_free()
 	elif body is StaticBody2D:
 		spawn_splat()
 		queue_free()
 
-func spawn_splat() -> void:
-	var s = splat.instance()
+
+func spawn_splat(modif: int = 1) -> void:
+	var s: Particles2D = splat.instance()
 	s.emitting = true
+	s.amount *= modif
+	s.scale += Vector2(modif / 4, modif / 4)
 	s.global_position = $Img/Tip.global_position
 	get_node("/root").add_child(s)
 
@@ -46,3 +51,11 @@ func setup(p: Vector2, v: Vector2, owner, t: int):
 func _on_Timer_timeout():
 	spawn_splat()
 	queue_free()
+
+
+func _on_Laser_area_entered(area):
+	if hp >= 1 and area.is_in_group(gamestate.HEADS):
+		area.dmg(dmg * 3)
+		hp -= 1
+		spawn_splat(2)
+		queue_free()

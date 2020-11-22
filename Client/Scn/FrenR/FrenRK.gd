@@ -69,14 +69,19 @@ func _ready():
 	update_hp()
 
 func dmg(d: int):
-	hp -= 1
-	update_hp()
+	hp -= d
 	if ctrl:
+		update_hp()
 		if hp <= 0:
 			rpc("die")
 
 func update_hp():
 	health.value = hp
+	for pid in gamestate.players:
+		rpc_id(pid, "h", hp)
+
+remote func h(he: int):
+	hp = he
 
 remotesync func die():
 	if is_network_master():
@@ -229,3 +234,5 @@ onready var anim = $Anim
 func _on_ReloadTime_timeout():
 	ammo = AMMO_MAX
 	
+
+

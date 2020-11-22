@@ -3,7 +3,6 @@
 [ext_resource path="res://Scn/Archive/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scn/Enemy.gd" type="Script" id=2]
 
-
 [node name="Enemy" instance=ExtResource( 1 )]
 gravity_scale = 0.0
 script = ExtResource( 2 )
