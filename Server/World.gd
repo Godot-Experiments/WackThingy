@@ -14,7 +14,9 @@ puppetsync func spawn_player(spawn_pos, id):
 
 
 puppetsync func remove_player(id):
-	$Players.get_node(String(id)).queue_free()
+	var p = $Players.get_node(String(id))
+	if is_instance_valid(p):
+		p.queue_free()
 
 var color : int = 1
 func _on_Timer_timeout():

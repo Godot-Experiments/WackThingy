@@ -61,7 +61,7 @@ __meta__ = {
 [node name="Title" type="Label" parent="Login/Panel/VBox"]
 margin_right = 314.0
 margin_bottom = 16.0
-text = "Wack Thingy!"
+text = "Laser Bully The SHeK ThinG"
 align = 1
 valign = 1
 

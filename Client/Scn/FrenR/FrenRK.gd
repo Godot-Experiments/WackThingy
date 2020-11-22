@@ -49,7 +49,9 @@ func dmg(d: int):
 		if hp <= 0:
 			rpc("die")
 
+const respawn_ui := preload("res://Scn/Respawn.tscn")
 remotesync func die():
+	get_node("/root").add_child(respawn_ui.instance())
 	queue_free()
 
 remote func w(wa: int):
