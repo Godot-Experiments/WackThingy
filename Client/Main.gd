@@ -19,6 +19,7 @@ func _ready():
 	status.modulate = Color.yellow
 	team.add_item("Bully The SHek", 0)
 	team.add_item("Save the sHEK", 1)
+	team.add_item("EVERYTHING MUST BURN", 2)
 	_on_Team_item_selected(0)
 	chara.add_item("Duhee", 0)
 	chara.add_item("Shecc", 1)
@@ -69,6 +70,7 @@ func _on_server_disconnect():
 
 func _on_Team_item_selected(id: int):
 	gamestate.team = id
+	print(id)
 
 
 func _on_CharSel_item_selected(id: int):

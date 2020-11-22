@@ -8,9 +8,12 @@ var par
 var team
 const splat := preload("res://Scn/FX/Splat.tscn")
 func _ready():
-	randomize()
-#	$Img.default_color = gamestate.colors[randi() % gamestate.color_size]
-	$Img.default_color = gamestate.colors[team]
+	$Light.energy = gamestate.laser_light
+	if team == 2:
+		randomize()
+		$Img.default_color = gamestate.colors[randi() % gamestate.color_size]
+	else:
+		$Img.default_color = gamestate.colors[team]
 #	$laser.texture = possible[randi() % 3]
 
 func _physics_process(_delta):

@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var Player = load("res://Player.tscn")
-
+var color : int = 1
 
 puppetsync func spawn_player(spawn_pos, id):
 	var player = Player.instance()
@@ -18,7 +18,7 @@ puppetsync func remove_player(id):
 	if is_instance_valid(p):
 		p.queue_free()
 
-var color : int = 1
+
 func _on_Timer_timeout():
 	color = randi() % 3
 	rpc("d", color)

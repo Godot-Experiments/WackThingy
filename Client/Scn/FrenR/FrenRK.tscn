@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scn/FrenR/FrenRK.gd" type="Script" id=1]
 [ext_resource path="res://Font/font.ttf" type="DynamicFontData" id=2]
@@ -7,14 +7,34 @@
 [ext_resource path="res://Img/FriendR/forearm.png" type="Texture" id=5]
 [ext_resource path="res://Img/FriendR/body.png" type="Texture" id=6]
 [ext_resource path="res://Img/FriendR/head.png" type="Texture" id=7]
+[ext_resource path="res://Theme/MenuTheme.tres" type="Theme" id=8]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 28.0
 height = 8.0
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="CanvasItemMaterial" id=2]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+light_mode = 1
+
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "Reload"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("UI2/Ammo:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [node name="FrenRK" type="KinematicBody2D"]
 light_mask = 0
@@ -107,27 +127,90 @@ polygon = PoolVector2Array( -18, -12.898, -13, -31.898, -19, -38.898, -26, -53.8
 position = Vector2( -3.5, -44 )
 
 [node name="HeadHitbox" type="CollisionShape2D" parent="HeadArea"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="Node2D" parent="."]
 
-[node name="Announcement" type="Label" parent="UI"]
-margin_left = 692.0
-margin_top = 329.0
-margin_right = 844.0
-margin_bottom = 361.0
-custom_fonts/font = SubResource( 3 )
-text = "asdfasdf"
+[node name="Health" type="ProgressBar" parent="UI"]
+material = SubResource( 2 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -75.0
+margin_top = -144.762
+margin_right = 75.0
+margin_bottom = -128.762
+theme = ExtResource( 8 )
+max_value = 10.0
+value = 7.0
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpikeTime" type="Timer" parent="."]
+[node name="Tag" type="Label" parent="UI"]
+light_mask = 0
+material = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.9311
+margin_top = -174.552
+margin_right = 76.0689
+margin_bottom = -142.552
+rect_pivot_offset = Vector2( 76, 0 )
+custom_fonts/font = SubResource( 4 )
+text = "You"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadTime" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.1
 one_shot = true
 
 [node name="GroundDetect" type="RayCast2D" parent="."]
 enabled = true
 
 [node name="Mouse" type="Node2D" parent="."]
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/Reload = SubResource( 5 )
+
+[node name="UI2" type="CanvasLayer" parent="."]
+
+[node name="Ammo" type="ProgressBar" parent="UI2"]
+material = SubResource( 2 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 525.261
+margin_top = 814.662
+margin_right = 724.261
+margin_bottom = 845.662
+theme = ExtResource( 8 )
+max_value = 6.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoTag" type="Label" parent="UI2"]
+light_mask = 0
+material = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 396.198
+margin_top = 364.224
+margin_right = 548.198
+margin_bottom = 396.224
+rect_pivot_offset = Vector2( 76, 0 )
+custom_fonts/font = SubResource( 4 )
+text = "Ammo"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="ReloadTime" to="." method="_on_ReloadTime_timeout"]

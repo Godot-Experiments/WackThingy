@@ -25,10 +25,10 @@ puppet func remove_player(id):
 
 
 onready var dark: CanvasModulate = $Dark
-var colors := [Color("242424"), Color.white, Color.black]
+var colors := [Color.black, Color("242424"), Color.white]
 
 remote func d(c: int) -> void:
 	# changes lighting
-	print(c)
 	$Tween.interpolate_property(dark, "color", dark.color, colors[c], 2)
 	$Tween.start()
+	gamestate.laser_light = min(.7/(c + .701), .6)

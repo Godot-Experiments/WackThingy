@@ -9,7 +9,7 @@ func _on_Respawn_timeout():
 	if pid in gamestate.players:
 		var pos := gamestate.random_vector2(500, 500)
 		if gamestate.players[pid][1] == 1:
-			pos += Vector2(500, 0)
+			pos += gamestate.enemy_offset
 		get_parent().rpc("spawn_player", pos, pid)
 		print("RESPAWNING")
 	queue_free()

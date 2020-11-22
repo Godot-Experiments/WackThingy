@@ -9,7 +9,7 @@ script = ExtResource( 1 )
 
 [node name="DarknessTime" type="Timer" parent="."]
 process_mode = 0
-wait_time = 10.0
+wait_time = 16.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

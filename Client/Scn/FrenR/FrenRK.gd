@@ -2,39 +2,52 @@ extends KinematicBody2D
 
 const respawn_ui := preload("res://Scn/Respawn.tscn")
 
+const laser_s = preload("res://Scn/Laser.tscn")
+
+const AMMO_MAX := 6
+var ammo := AMMO_MAX
+
 const WALK_FORCE = 600
 const WALK_MAX_SPEED = 800
 const JUMP_SPEED = 1600
 const STOP_FORCE = 100
 const WALK_THRESH = WALK_FORCE * 0.2
 const MAX_JUMPS = 3
+
+var shot: bool = false
 var walk: int
 var velocity := Vector2()
 var num_jumps := 0
 onready var gravity = 80
-
+#ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 remote var d: int = 0
 var smoothing := .9
 var right_clicked: bool = false
+
+onready var ammo_bar = $UI2/Ammo
+#onready var ammo_tag = $UI2/AmmoTag
+onready var reload = $ReloadTime
 onready var hand = $Upperarm/Forearm/Hand
 #onready var upperarm_k = $Upperarm/Kinematic
 #onready var forearm_k = $Upperarm/Forearm/Kinematic
 onready var upperarm = $Upperarm
 onready var forearm = $Upperarm/Forearm
-
+onready var health = $UI/Health
+onready var tag = $UI/Tag
 onready var ground_detect = $GroundDetect
 onready var mouse = $Mouse
 
 const UARM_ROT_OFF = .71
-#ProjectSettings.get_setting("physics/2d/default_gravity")
+
 
 export var ctrl := false
 
 var hp := 10
 
-var team
+var flipped: bool = false
+var team: int
 
 func setup(t: int, c: int) -> void:
 	team = t
@@ -44,13 +57,21 @@ func _ready():
 	ctrl = is_network_master()
 	$Cam.current = ctrl
 	add_to_group(gamestate.DAMAGEABLE)
+	if not ctrl:
+		health.material = null
+		tag.material = null
+		tag.text = gamestate.players[get_network_master()][0]
+	update_hp()
 
 func dmg(d: int):
+	hp -= 1
+	update_hp()
 	if ctrl:
-		hp -= 1
 		if hp <= 0:
 			rpc("die")
 
+func update_hp():
+	health.value = hp
 
 remotesync func die():
 	if is_network_master():
@@ -66,7 +87,6 @@ remote func p(pos: Vector2) -> void:
 remote func jump() -> void:
 	velocity.y = -JUMP_SPEED
 
-var flipped: bool = false
 
 func flip_left(left: bool):
 	if not flipped and left:
@@ -74,11 +94,13 @@ func flip_left(left: bool):
 		scale.x = -1
 		for id in gamestate.players:
 			rpc_id(id, "fl", left)
+		$UI.scale.x = -1
 	elif flipped and not left:
 		flipped = false
 		scale.x = -1
 		for id in gamestate.players:
 			rpc_id(id, "fl", left)
+		$UI.scale.x = 1
 
 remote func fl(left: bool) -> void:
 	flip_left(left)
@@ -129,13 +151,13 @@ func _physics_process(delta):
 			rpc("die")
 		if is_on_floor():
 			num_jumps = MAX_JUMPS
-	
 		if Input.is_action_just_pressed("ui_up") and num_jumps >= 1:
 			jump()
 			for id in gamestate.players:
 				rpc_id(id, "jump")
 			num_jumps -= 1
-	
+		if Input.is_action_just_pressed("reload"):
+			reload()
 	chk_hand_input()
 
 
@@ -164,19 +186,23 @@ func chk_hand_input() -> void:
 		else: 
 			reset_arm(smoothing / 8)
 
-const laser_s = preload("res://Scn/Laser.tscn")
 func shoot() -> void:
-	var laser = laser_s.instance()
-	laser.setup(
-		$Upperarm/Forearm/Hand.global_position,
-		$Upperarm/Forearm/Hand.global_position - $Upperarm/Forearm.global_position,
-		self,
-		team
-	)
-	get_tree().get_root().add_child(laser)
-	forearm.rotation = lerp(forearm.rotation, -2.8, smoothing/2)
+	if ammo >= 1:
+		var laser = laser_s.instance()
+		laser.setup(
+			$Upperarm/Forearm/Hand.global_position,
+			$Upperarm/Forearm/Hand.global_position - $Upperarm/Forearm.global_position,
+			self,
+			team
+		)
+		get_tree().get_root().add_child(laser)
+		forearm.rotation = lerp(forearm.rotation, -2.8, smoothing/2)
+		ammo -= 1
+		if ammo <= 0:
+			reload()
+		ammo_bar.value = ammo
 
-var shot: bool = false
+
 remote func s() -> void:
 	shot = true
 #	forearm_k.move_and_collide(Vector2.ZERO)
@@ -188,16 +214,13 @@ func reset_arm(smooth: float) -> void:
 	upperarm.position = upperarm.position.linear_interpolate(Vector2(-12, 3), smooth)
 
 
+func reload() -> void:
+	reload.start()
+	anim.play("Reload")
 
 
+onready var anim = $Anim
 
-
-
-
-
-
-
-
-
-
-
+func _on_ReloadTime_timeout():
+	ammo = AMMO_MAX
+	

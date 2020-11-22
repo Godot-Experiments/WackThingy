@@ -59,7 +59,6 @@ func _connected_fail():
 
 puppet func register_player(id, new_player_data, team: int, chara: int):
 	players[id] = [new_player_data, team, chara]
-	print(id, "  ", team)
 
 
 puppet func unregister_player(id):
@@ -85,6 +84,7 @@ puppet func pre_start_game():
 
 
 const DAMAGEABLE:= "0"
-var colors: PoolColorArray = [Color("ff007e"), Color("af00ff"), Color("007cff"), Color("00ffdb"), Color("00ff16"), Color("85ff00"), Color("ffcb00"), Color("fe2b2b")]
+var colors: PoolColorArray = [Color("ff007e"), Color("007cff"), Color("af00ff"), Color("00ffdb"), Color("00ff16"), Color("85ff00"), Color("ffcb00"), Color("fe2b2b")]
 var color_size = colors.size()
 var light: int = 1
+var laser_light: float = 0

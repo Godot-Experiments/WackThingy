@@ -72,7 +72,6 @@ explosiveness = 0.95
 process_material = SubResource( 8 )
 
 [node name="Light" type="Light2D" parent="."]
-position = Vector2( 40, 0 )
 texture = ExtResource( 2 )
 energy = 0.5
 shadow_enabled = true

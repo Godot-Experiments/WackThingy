@@ -71,12 +71,16 @@ remote func populate_world():
 	
 	# Spawn new player everywhere
 	var pos := random_vector2(500, 500)
-	if players[caller_id][1] == 1:
-		pos += Vector2(500, 0)
+	match players[caller_id][1]:
+		1:
+			pos += enemy_offset
+		2:
+			pos += enemy_offset / 2
 	world.rpc("spawn_player", pos, caller_id)
 	world.rpc_id(caller_id, "d", world.color)
 
+var enemy_offset := Vector2(2000, 0)
 
-# Return random 2D vector inside bounds 0, 0, bound_x, bound_y
+
 static func random_vector2(bound_x, bound_y) -> Vector2:
-	return Vector2(randf() * bound_x, randf() * bound_y)
+	return Vector2(randf() * bound_x - bound_x / 2, randf() * bound_y - bound_y / 2)
