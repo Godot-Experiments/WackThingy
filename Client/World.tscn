@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Img/bg.jpg" type="Texture" id=2]
+[ext_resource path="res://Scn/Level/Box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Img/ball.png" type="Texture" id=4]
 [ext_resource path="res://Wall.tscn" type="PackedScene" id=6]
 
@@ -31,18 +32,63 @@ z_index = -2
 texture = ExtResource( 2 )
 
 [node name="Wall" parent="." instance=ExtResource( 6 )]
-position = Vector2( 731.343, 752.918 )
-scale = Vector2( 1, 0.4 )
+position = Vector2( 1048.24, 765.594 )
+scale = Vector2( 0.8, 0.6 )
 
 [node name="Wall2" parent="." instance=ExtResource( 6 )]
-position = Vector2( -946.115, 350.151 )
-rotation = 0.710063
-scale = Vector2( 0.355297, 0.969703 )
+position = Vector2( -1123.58, 375.503 )
+rotation = 0.598329
+scale = Vector2( 0.355, 0.5 )
 
 [node name="Wall3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 2967.55, 518.486 )
-rotation = -0.54024
+position = Vector2( 3043.6, 543.838 )
+rotation = -0.501556
 scale = Vector2( 0.236642, 0.542069 )
+
+[node name="Wall4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 432.109, -124.834 )
+rotation = -0.0559026
+scale = Vector2( 0.236642, 0.542069 )
+
+[node name="Wall5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2029.9, -124.834 )
+rotation = 0.245809
+scale = Vector2( 0.236642, 0.542069 )
+
+[node name="Wall6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1191.52, -2186.3 )
+rotation = -0.00523599
+scale = Vector2( 0.1, 0.542 )
+
+[node name="Wall7" parent="." instance=ExtResource( 6 )]
+position = Vector2( -1087.56, -966.848 )
+rotation = 0.17129
+scale = Vector2( 0.35, 0.542 )
+
+[node name="Wall10" parent="." instance=ExtResource( 6 )]
+position = Vector2( 243.039, -1495.98 )
+rotation = 0.00192104
+scale = Vector2( 0.4, 0.542 )
+
+[node name="Wall11" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2367.34, -1285.88 )
+rotation = 0.191013
+scale = Vector2( 0.296631, 0.691959 )
+
+[node name="Wall8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3650.98, -521.292 )
+rotation = -0.0266084
+scale = Vector2( 0.236642, 0.542069 )
+
+[node name="Wall9" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4257.93, 303.526 )
+rotation = -0.302356
+scale = Vector2( 0.236642, 0.542069 )
+
+[node name="Wall12" parent="." instance=ExtResource( 6 )]
+position = Vector2( -2535.16, -225.602 )
+rotation = -0.302356
+scale = Vector2( 0.189357, 0.766232 )
 
 [node name="Dark" type="CanvasModulate" parent="."]
 
@@ -50,3 +96,49 @@ scale = Vector2( 0.236642, 0.542069 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 2000, 0 )
+
+[node name="Box" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1075.27, 631.258 )
+scale = Vector2( 2, 4 )
+
+[node name="Box9" parent="." instance=ExtResource( 3 )]
+position = Vector2( -591.33, 213.351 )
+scale = Vector2( -6.05848, 2.07853 )
+
+[node name="Box10" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3035.83, 436.484 )
+scale = Vector2( -6.05848, 2.07853 )
+
+[node name="Box2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1075.27, 402.9 )
+scale = Vector2( 2, 3 )
+
+[node name="Box3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1601.22, -326.099 )
+rotation = -0.000977299
+scale = Vector2( 1.23734, 2.47676 )
+
+[node name="Box5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1654.39, -270.198 )
+rotation = -0.000977299
+scale = Vector2( 2, 3 )
+
+[node name="Box6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1600.66, -542.826 )
+rotation = -0.000977299
+scale = Vector2( 1.1445, 2.80922 )
+
+[node name="Box4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 889.385, -251.035 )
+rotation = 0.0970099
+scale = Vector2( 1.33985, 2.81533 )
+
+[node name="Box8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 825.042, -205.994 )
+rotation = 0.100663
+scale = Vector2( 2, 3 )
+
+[node name="Box7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 915.491, -477.497 )
+rotation = 0.161558
+scale = Vector2( -1.31235, 2.86221 )

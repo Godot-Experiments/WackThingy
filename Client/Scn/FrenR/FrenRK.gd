@@ -61,6 +61,11 @@ func _ready():
 		health.material = null
 		tag.material = null
 		tag.text = gamestate.players[get_network_master()][0]
+	match team:
+		0:
+			modulate = Color("a3f3d5")
+		1:
+			modulate = Color("c5a3f3")
 	update_hp()
 
 func dmg(d: int):

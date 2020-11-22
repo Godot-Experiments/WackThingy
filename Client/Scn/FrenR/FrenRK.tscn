@@ -5,7 +5,7 @@
 [ext_resource path="res://Img/msk.png" type="Texture" id=3]
 [ext_resource path="res://Img/FriendR/upperarm.png" type="Texture" id=4]
 [ext_resource path="res://Img/FriendR/forearm.png" type="Texture" id=5]
-[ext_resource path="res://Img/FriendR/body.png" type="Texture" id=6]
+[ext_resource path="res://Img/FrenR/body.png" type="Texture" id=6]
 [ext_resource path="res://Img/FriendR/head.png" type="Texture" id=7]
 [ext_resource path="res://Theme/MenuTheme.tres" type="Theme" id=8]
 
@@ -47,19 +47,8 @@ current = true
 zoom = Vector2( 2, 2 )
 process_mode = 0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -21.0955
-margin_top = -10.0
-margin_right = 21.9045
-margin_bottom = 81.0
-rect_pivot_offset = Vector2( 10, 10 )
-color = Color( 0.513726, 0.796078, 0.784314, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="body" type="Sprite" parent="."]
-position = Vector2( -10.0926, 1.2 )
+position = Vector2( -10.0926, 5.63822 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 centered = false
@@ -69,7 +58,7 @@ __meta__ = {
 }
 
 [node name="head" type="Sprite" parent="body"]
-position = Vector2( 6, -41 )
+position = Vector2( 6, -43.7739 )
 texture = ExtResource( 7 )
 centered = false
 offset = Vector2( -96, -178 )
