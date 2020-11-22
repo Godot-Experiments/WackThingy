@@ -14,7 +14,7 @@ const respawn := preload("res://Respawn.tscn")
 remote func die():
 	var r = respawn.instance()
 	r.pid = get_network_master()
-	get_node("/root/world").add_child(r)
+	get_node("/root/World").add_child(r)
 	queue_free()
 
 remote func p(pos: Vector2) -> void:
