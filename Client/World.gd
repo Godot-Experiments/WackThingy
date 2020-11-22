@@ -1,24 +1,33 @@
 extends Node2D
 
 
-var R = preload("res://Scn/FrenR/FrenRK.tscn")
-var A = preload("res://Scn/FrenR/FrenRK.tscn")
-var S = preload("res://Scn/FrenR/FrenRK.tscn")
-#const Player = preload("res://Player.tscn")
+var R := preload("res://Scn/FrenR/FrenRK.tscn")
+var A := preload("res://Scn/OtherFrens/FrenA.tscn")
+var Na := preload("res://Scn/OtherFrens/FrenNa.tscn")
+var K := preload("res://Scn/OtherFrens/FrenNa.tscn")
+var N := preload("res://Scn/OtherFrens/FrenNa.tscn")
+var E := preload("res://Scn/OtherFrens/FrenNa.tscn")
+
+var S := preload("res://Scn/OtherFrens/FrenS.tscn")
+var C := preload("res://Scn/OtherFrens/FrenNa.tscn")
+var chars := [R, A, Na, K, N, E, S, C]
+#const Player := preload("res://Player.tscn")
 
 puppet func spawn_player(spawn_pos, id):
 	var pdata: Array = gamestate.players[id]
 	var chara: int = pdata[2]
 	var player
-	match chara:
-		0:
-			player = R.instance()
-		1:
-			player = A.instance()
-		6:
-			player = S.instance()
-		_:
-			player = R.instance()
+#	match chara:
+#		0:
+#			player = R.instance()
+#		1:
+#			player = A.instance()
+#		2
+#		6:
+#			player = S.instance()
+#		_:
+#			player = R.instance()
+	player = chars[chara].instance()
 	player.position = spawn_pos
 	player.name = String(id) # Important
 	player.set_network_master(id) # Important
