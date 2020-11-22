@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laser3.png-b405f1d249da0108f02dbdfcb0c1380d.stex"
+path="res://.import/forearm.png-2441545d1dbe7da5e2f74e1bdcb63ead.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Img/Laser/laser3.png"
-dest_files=[ "res://.import/laser3.png-b405f1d249da0108f02dbdfcb0c1380d.stex" ]
+source_file="res://Img/IdiotCreator/forearm.png"
+dest_files=[ "res://.import/forearm.png-2441545d1dbe7da5e2f74e1bdcb63ead.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

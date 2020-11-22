@@ -4,12 +4,12 @@ extends Node2D
 var R := preload("res://Scn/FrenR/FrenRK.tscn")
 var A := preload("res://Scn/OtherFrens/FrenA.tscn")
 var Na := preload("res://Scn/OtherFrens/FrenNa.tscn")
-var K := preload("res://Scn/OtherFrens/FrenNa.tscn")
-var N := preload("res://Scn/OtherFrens/FrenNa.tscn")
-var E := preload("res://Scn/OtherFrens/FrenNa.tscn")
+var K := preload("res://Scn/OtherFrens/FrenK.tscn")
+var N := preload("res://Scn/OtherFrens/FrenN.tscn")
+var E := preload("res://Scn/OtherFrens/FrenE.tscn")
 
 var S := preload("res://Scn/OtherFrens/FrenS.tscn")
-var C := preload("res://Scn/OtherFrens/FrenNa.tscn")
+var C := preload("res://Scn/OtherFrens/FrenC.tscn")
 var chars := [R, A, Na, K, N, E, S, C]
 #const Player := preload("res://Player.tscn")
 
