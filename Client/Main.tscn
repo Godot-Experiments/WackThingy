@@ -34,9 +34,10 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -211.0
-margin_top = -221.0
+margin_top = -240.0
 margin_right = 211.0
-margin_bottom = 221.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 422, 480 )
 theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -48,10 +49,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -157.0
-margin_top = -198.0
+margin_top = -180.0
 margin_right = 157.0
-margin_bottom = 198.0
-custom_constants/separation = 100
+margin_bottom = 180.0
+rect_min_size = Vector2( 314, 350 )
+custom_constants/separation = 64
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -63,29 +65,92 @@ text = "Wack Thingy!"
 align = 1
 valign = 1
 
-[node name="HBox" type="HBoxContainer" parent="Login/Panel/VBox"]
-margin_top = 116.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Login/Panel/VBox"]
+margin_top = 80.0
 margin_right = 314.0
-margin_bottom = 148.0
+margin_bottom = 220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="NameLabel" type="Label" parent="Login/Panel/VBox/HBox"]
+[node name="HBox" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
+margin_right = 314.0
+margin_bottom = 32.0
+
+[node name="NameLabel" type="Label" parent="Login/Panel/VBox/VBoxContainer/HBox"]
 margin_top = 8.0
 margin_right = 54.0
 margin_bottom = 24.0
 text = "Name: "
 
-[node name="NameEdit" type="LineEdit" parent="Login/Panel/VBox/HBox"]
+[node name="NameEdit" type="LineEdit" parent="Login/Panel/VBox/VBoxContainer/HBox"]
 margin_left = 58.0
 margin_right = 314.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
 text = "Player"
+
+[node name="HBox2" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
+margin_top = 36.0
+margin_right = 314.0
+margin_bottom = 68.0
+
+[node name="TeamLabel" type="Label" parent="Login/Panel/VBox/VBoxContainer/HBox2"]
+margin_top = 8.0
+margin_right = 52.0
+margin_bottom = 24.0
+text = "Team: "
+
+[node name="Team" type="OptionButton" parent="Login/Panel/VBox/VBoxContainer/HBox2"]
+margin_left = 56.0
+margin_right = 314.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_horizontal = 3
+
+[node name="HBox3" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
+margin_top = 72.0
+margin_right = 314.0
+margin_bottom = 104.0
+
+[node name="Char" type="Label" parent="Login/Panel/VBox/VBoxContainer/HBox3"]
+margin_top = 8.0
+margin_right = 92.0
+margin_bottom = 24.0
+text = "Character: "
+
+[node name="CharSel" type="OptionButton" parent="Login/Panel/VBox/VBoxContainer/HBox3"]
+margin_left = 96.0
+margin_right = 314.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+
+[node name="HBox4" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
+margin_top = 108.0
+margin_right = 314.0
+margin_bottom = 140.0
+
+[node name="LightTxt" type="Label" parent="Login/Panel/VBox/VBoxContainer/HBox4"]
+margin_top = 8.0
+margin_right = 62.0
+margin_bottom = 24.0
+text = "Lights: "
+
+[node name="Light" type="OptionButton" parent="Login/Panel/VBox/VBoxContainer/HBox4"]
+margin_left = 66.0
+margin_right = 314.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+disabled = true
 
 [node name="JoinButton" type="Button" parent="Login/Panel/VBox"]
 margin_left = 132.0
-margin_top = 248.0
+margin_top = 284.0
 margin_right = 182.0
-margin_bottom = 280.0
+margin_bottom = 316.0
 size_flags_horizontal = 4
 text = "Join"
 
@@ -95,4 +160,7 @@ margin_right = 314.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 300, 0 )
 align = 1
+[connection signal="item_selected" from="Login/Panel/VBox/VBoxContainer/HBox2/Team" to="." method="_on_Team_item_selected"]
+[connection signal="item_selected" from="Login/Panel/VBox/VBoxContainer/HBox3/CharSel" to="." method="_on_CharSel_item_selected"]
+[connection signal="item_selected" from="Login/Panel/VBox/VBoxContainer/HBox4/Light" to="." method="_on_Light_item_selected"]
 [connection signal="pressed" from="Login/Panel/VBox/JoinButton" to="." method="_on_JoinButton_pressed"]

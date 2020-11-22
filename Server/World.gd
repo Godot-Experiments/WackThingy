@@ -15,3 +15,7 @@ puppetsync func spawn_player(spawn_pos, id):
 
 puppetsync func remove_player(id):
 	$Players.get_node(String(id)).queue_free()
+
+
+func _on_Timer_timeout():
+	rpc("d", randi() % 3)

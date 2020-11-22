@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scn/FX/Splat.gd" type="Script" id=1]
-
-
+[ext_resource path="res://Img/light.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0, 0, 1, 0, 0.115234, 1, 1 )
@@ -55,7 +54,11 @@ scale_random = 1.0
 color_ramp = SubResource( 7 )
 
 [node name="Splat" type="Particles2D"]
+modulate = Color( 1.42, 1.42, 1.42, 1 )
+scale = Vector2( 1.25, 1.25 )
+emitting = false
 amount = 128
+one_shot = true
 speed_scale = 1.5
 explosiveness = 0.95
 process_material = SubResource( 5 )
@@ -67,3 +70,16 @@ amount = 42
 one_shot = true
 explosiveness = 0.95
 process_material = SubResource( 8 )
+
+[node name="Light" type="Light2D" parent="."]
+position = Vector2( 40, 0 )
+texture = ExtResource( 2 )
+energy = 0.5
+shadow_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.2
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

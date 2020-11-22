@@ -6,6 +6,7 @@ var jump_speed := 256
 var rotation_speed := 512
 var smoothing := .9
 var bonccs := 0
+var right_clicked: bool = false
 
 onready var hand = $Upperarm/Forearm/Hand
 onready var upperarm_k = $Upperarm/Kinematic
@@ -22,11 +23,11 @@ func _ready():
 	gravity_scale = 8
 #	Engine.time_scale = .1
 
-var right_clicked: bool = false
-func _physics_process(delta):
-	chk_input()
-	chk_hand_input()
 
+func _physics_process(delta):
+
+#	chk_hand_input()
+	chk_input()
 var num_jumps: int = 2
 func chk_input() -> void:
 	var is_on_ground : bool = ground_detect.is_colliding()
@@ -93,9 +94,9 @@ func move(dir):
 
 func flip(left: bool):
 	if left:
-		scale.x = 1
-#	else:
-#		scale.x = -1
+		upperarm.scale.x = .4
+	else:
+		upperarm.scale.x = -.4
 
 func _on_HeadArea_body_entered(body):
 	if body is StaticBody2D:

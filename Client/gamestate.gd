@@ -13,7 +13,8 @@ var my_name = "Client"
 
 # Players dict stored as id:name
 var players = {}
-
+var team: int = 0
+var chara: int = 0
 
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -56,8 +57,9 @@ func _connected_fail():
 	connect_to_server()
 
 
-puppet func register_player(id, new_player_data):
-	players[id] = new_player_data
+puppet func register_player(id, new_player_data, team: int, chara: int):
+	players[id] = [new_player_data, team, chara]
+	print(id, "  ", team)
 
 
 puppet func unregister_player(id):
@@ -71,7 +73,7 @@ func get_player_list():
 
 puppet func pre_start_game():
 	# Register ourselves with the server
-	rpc_id(1, "register_player", my_name)
+	rpc_id(1, "register_player", my_name, team, chara)
 	
 	# Load world
 	get_node("/root/Main").hide()
@@ -82,5 +84,7 @@ puppet func pre_start_game():
 	rpc_id(1, "populate_world")
 
 
-
- 
+const DAMAGEABLE:= "0"
+var colors: PoolColorArray = [Color("ff007e"), Color("af00ff"), Color("007cff"), Color("00ffdb"), Color("00ff16"), Color("85ff00"), Color("ffcb00"), Color("fe2b2b")]
+var color_size = colors.size()
+var light: int = 1

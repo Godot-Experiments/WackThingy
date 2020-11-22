@@ -38,21 +38,22 @@ func _player_disconnected(id):
 
 
 # Player management functions
-remote func register_player(new_player_name):
+remote func register_player(new_player_name: String, team: int, chara: int):
 	# We get id this way instead of as parameter, to prevent users from pretending to be other users
 	var caller_id = get_tree().get_rpc_sender_id()
 	
-	# Add him to our list
-	players[caller_id] = new_player_name
+	# Add to our list
+	players[caller_id] = [new_player_name, team, chara]
 	
 	# Add everyone to new player:
 	for p_id in players:
-		rpc_id(caller_id, "register_player", p_id, players[p_id]) # Send each player to new dude
+		var data: Array = players[p_id]
+		rpc_id(caller_id, "register_player", p_id, data[0], data[1], data[2]) # Send each player to new dude
 	
-	rpc("register_player", caller_id, players[caller_id]) # Send new dude to all players
+	rpc("register_player", caller_id, players[caller_id][0], team, chara) # Send new dude to all players
 	# NOTE: this means new player's register gets called twice, but fine as same info sent both times
 	
-	print("Client ", caller_id, " registered as ", new_player_name)
+	print("Client ", caller_id, " registered as ", new_player_name, " of team ", team)
 
 
 puppetsync func unregister_player(id):
@@ -64,15 +65,17 @@ puppetsync func unregister_player(id):
 remote func populate_world():
 	var caller_id = get_tree().get_rpc_sender_id()
 	var world = get_node("/root/World")
-	
 	# Spawn all current players on new client
 	for player in world.get_node("Players").get_children():
 		world.rpc_id(caller_id, "spawn_player", player.position, player.get_network_master())
 	
 	# Spawn new player everywhere
-	world.rpc("spawn_player", random_vector2(500, 500), caller_id)
+	var pos := random_vector2(500, 500)
+	if players[caller_id][1] == 1:
+		pos += Vector2(500, 0)
+	world.rpc("spawn_player", pos, caller_id)
 
 
 # Return random 2D vector inside bounds 0, 0, bound_x, bound_y
-func random_vector2(bound_x, bound_y):
+func random_vector2(bound_x, bound_y) -> Vector2:
 	return Vector2(randf() * bound_x, randf() * bound_y)
