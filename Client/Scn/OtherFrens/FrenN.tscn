@@ -15,8 +15,8 @@ light_mode = 1
 texture = ExtResource( 4 )
 
 [node name="head" parent="body" index="0"]
-position = Vector2( -17.4975, -119.511 )
-scale = Vector2( 0.4, 0.4 )
+position = Vector2( -26.1668, -132.663 )
+scale = Vector2( 0.45, 0.45 )
 texture = ExtResource( 2 )
 
 [node name="Upperarm" parent="." index="2"]
@@ -26,7 +26,7 @@ texture = ExtResource( 3 )
 texture = ExtResource( 5 )
 
 [node name="HeadArea" parent="." index="4"]
-position = Vector2( 3.31119, -47.9433 )
+position = Vector2( 1.09209, -51.5494 )
 
 [node name="Tag" parent="UI" index="1"]
 material = SubResource( 1 )
