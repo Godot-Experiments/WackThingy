@@ -21,7 +21,7 @@ func _physics_process(_delta):
 	position += vel
 
 func _on_Laser_body_entered(body):
-	if hp >= 1 and body.is_in_group(gamestate.DAMAGEABLE) and team != body.team:
+	if hp >= 1 and body.is_in_group(gamestate.DAMAGEABLE) and (team != body.team or team == 2):
 		body.dmg(dmg)
 		hp -= 1
 		spawn_splat()
@@ -54,8 +54,8 @@ func _on_Timer_timeout():
 
 
 func _on_Laser_area_entered(area):
-	if hp >= 1 and area.is_in_group(gamestate.HEADS):
-		area.dmg(dmg * 3)
+	if hp >= 1 and area.is_in_group(gamestate.HEADS) and (team != area.team or team == 2):
+		area.dmg(dmg * 2)
 		hp -= 1
 		spawn_splat(2)
 		queue_free()

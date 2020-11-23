@@ -17,7 +17,7 @@ height = 8.0
 [sub_resource type="CanvasItemMaterial" id=2]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 1
 
 [sub_resource type="DynamicFont" id=4]
@@ -145,7 +145,7 @@ __meta__ = {
 
 [node name="Tag" type="Label" parent="UI"]
 light_mask = 0
-material = SubResource( 6 )
+material = SubResource( 3 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -193,7 +193,7 @@ __meta__ = {
 
 [node name="AmmoTag" type="Label" parent="UI2"]
 light_mask = 0
-material = SubResource( 6 )
+material = SubResource( 3 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

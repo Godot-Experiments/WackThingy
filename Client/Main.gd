@@ -13,14 +13,17 @@ func _ready():
 	gamestate.connect("server_disconnected", self, "_on_server_disconnect")
 #	gamestate.connect("players_updated", self, "update_players_list")
 	
-	join_button.disabled = true
+#	join_button.disabled = true
 	
-	status.text = "Connecting..."
+	status.text = "Gimme da IP"
 	status.modulate = Color.yellow
 	team.add_item("Bully The SHek", 0)
 	team.add_item("Save the sHEK", 1)
 	team.add_item("EVERYTHING MUST BURN", 2)
-	_on_Team_item_selected(0)
+	randomize()
+	var t := randi() % 3
+	team.select(t)
+	_on_Team_item_selected(t)
 	chara.add_item("Doohee", 0)
 	chara.add_item("Shecc", 1)
 	chara.add_item("Ban", 2)
@@ -29,15 +32,18 @@ func _ready():
 	chara.add_item("Me", 5)
 	chara.add_item("Wich", 6)
 	chara.add_item("Idoit", 7)
-	_on_CharSel_item_selected(0)
+	var c := randi() % 8
+	chara.select(c)
+	_on_CharSel_item_selected(c)
 	_on_Light_item_selected(1)
+	regex.compile("[\\d\\.]")
 
 
 
 func _on_JoinButton_pressed():
-	gamestate.my_name = name_edit.text
-	gamestate.pre_start_game()
-	$MenuCam.current = false
+	gamestate.connect_to_server()
+	status.text = "Connecting..."
+
 
 func show() -> void:
 	.show()
@@ -48,8 +54,10 @@ func hide() -> void:
 	panel.hide()
 
 func _on_connection_success():
-	join_button.disabled = false
-	
+	join_button.disabled = true
+	gamestate.my_name = name_edit.text
+	gamestate.pre_start_game()
+	$MenuCam.current = false
 	status.text = "Connected"
 	status.modulate = Color.green
 
@@ -78,3 +86,17 @@ func _on_CharSel_item_selected(id: int):
 
 func _on_Light_item_selected(id: int):
 	gamestate.light = id
+
+var regex = RegEx.new()
+onready var ip = $Login/Panel/VBox/VBoxContainer/HBox5/IP
+func _on_IP_text_changed(new_text: String) -> void:
+	var og : int = ip.caret_position
+	var result = regex.search_all(new_text)
+	new_text = ""
+	if result:
+		for r in result:
+#			print(r.get_string())
+			new_text += r.get_string()
+	ip.text = new_text
+	ip.caret_position = og
+	gamestate.ip = new_text

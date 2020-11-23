@@ -108,8 +108,8 @@ scale = Vector2( 0.189357, 0.766232 )
 position = Vector2( 2000, 0 )
 
 [node name="Box" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1075.27, 631.258 )
-scale = Vector2( 2, 4 )
+position = Vector2( 1073.16, 614.416 )
+scale = Vector2( 2.5, 4 )
 
 [node name="Box9" parent="." instance=ExtResource( 3 )]
 position = Vector2( -591.33, 213.351 )

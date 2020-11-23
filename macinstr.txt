@@ -1,0 +1,9 @@
+unzip file
+cd to the file
+chmod +x “WackThingy.app/Contents/MacOS/WackThingy”
+Open by following that ^ path
+Error msg "developer unverified"
+Press ?
+Open General Pane
+Unlock admin to make changes
+press "open anyway" at the bottom (try reopening client if not there)

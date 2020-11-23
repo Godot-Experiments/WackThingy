@@ -1,9 +1,9 @@
 extends Node
 
 # Game port and ip
-const ip = "127.0.0.1"
-const DEFAULT_PORT = 44444
-
+var ip := ""
+const DEFAULT_PORT = 42424
+#const DEFAULT_PORT = 44444
 # Signal to let GUI know whats up
 signal connection_failed()
 signal connection_succeeded()
@@ -22,7 +22,7 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	
 	# Try to connect right away
-	connect_to_server()
+
 
 
 
@@ -59,10 +59,13 @@ func _connected_fail():
 
 puppet func register_player(id, new_player_data, team: int, chara: int):
 	players[id] = [new_player_data, team, chara]
+	if id != get_tree().get_network_unique_id():
+		other_players += [id]
 
 
 puppet func unregister_player(id):
 	players.erase(id)
+	other_players.erase(id)
 
 
 # Returns list of player names
@@ -89,3 +92,4 @@ var colors: PoolColorArray = [Color("ff007e"), Color("007cff"), Color("af00ff"),
 var color_size = colors.size()
 var light: int = 1
 var laser_light: float = 0
+var other_players: Array

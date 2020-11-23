@@ -61,6 +61,7 @@ func _ready():
 		health.material = null
 		tag.material = null
 		tag.text = gamestate.players[get_network_master()][0]
+		$UI2.queue_free()
 	match team:
 		0:
 			modulate = Color("a3f3d5")
@@ -68,16 +69,21 @@ func _ready():
 			modulate = Color("c5a3f3")
 	update_hp()
 
+
+const txt_part_s := preload("res://Scn/FX/TxtParticle.tscn")
 func dmg(d: int):
+	var t = txt_part_s.instance()
+	t.position = global_position
+	get_node("/root").add_child(t)
 	hp -= d
+	update_hp()
 	if ctrl:
-		update_hp()
 		if hp <= 0:
 			rpc("die")
 
 func update_hp():
 	health.value = hp
-	for pid in gamestate.players:
+	for pid in gamestate.other_players:
 		rpc_id(pid, "h", hp)
 
 remote func h(he: int):
@@ -102,20 +108,22 @@ func flip_left(left: bool):
 	if not flipped and left:
 		flipped = true
 		scale.x = -1
-		for id in gamestate.players:
-			rpc_id(id, "fl", left)
+		if ctrl:
+			for id in gamestate.other_players:
+				rpc_id(id, "fl", left)
 		$UI.scale.x = -1
 	elif flipped and not left:
 		flipped = false
 		scale.x = -1
-		for id in gamestate.players:
-			rpc_id(id, "fl", left)
+		if ctrl:
+			for id in gamestate.other_players:
+				rpc_id(id, "fl", left)
 		$UI.scale.x = 1
 
 remote func fl(left: bool) -> void:
 	flip_left(left)
 
-export var extents = 1000
+export var extents = 2500
 
 func _physics_process(delta):
 	if ctrl and (Input.is_action_just_pressed("ui_right")
@@ -124,12 +132,12 @@ func _physics_process(delta):
 			or Input.is_action_just_released("ui_right") 
 			):
 		walk = WALK_FORCE * (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
-		for id in gamestate.players:
+		for id in gamestate.other_players:
 			rpc_id(id, "w", walk)
 		rpc("p", position)
 		if Input.is_action_just_pressed("ui_left"):
 			flip_left(true)
-		elif Input.is_action_pressed("ui_right"):
+		elif Input.is_action_just_pressed("ui_right"):
 			flip_left(false)
 
 	# Slow down the player if they're not trying to move.
@@ -163,7 +171,7 @@ func _physics_process(delta):
 			num_jumps = MAX_JUMPS
 		if Input.is_action_just_pressed("ui_up") and num_jumps >= 1:
 			jump()
-			for id in gamestate.players:
+			for id in gamestate.other_players:
 				rpc_id(id, "jump")
 			num_jumps -= 1
 		if Input.is_action_just_pressed("reload"):
@@ -197,7 +205,7 @@ func chk_hand_input() -> void:
 			reset_arm(smoothing / 8)
 
 func shoot() -> void:
-	if ammo >= 1:
+	if ammo >= 1 and $ReloadTime.is_stopped():
 		var laser = laser_s.instance()
 		laser.setup(
 			$Upperarm/Forearm/Hand.global_position,
@@ -210,7 +218,8 @@ func shoot() -> void:
 		ammo -= 1
 		if ammo <= 0:
 			reload()
-		ammo_bar.value = ammo
+		if ctrl:
+			ammo_bar.value = ammo
 
 
 remote func s() -> void:

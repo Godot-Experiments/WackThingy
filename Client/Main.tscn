@@ -49,9 +49,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -157.0
-margin_top = -180.0
+margin_top = -216.0
 margin_right = 157.0
-margin_bottom = 180.0
+margin_bottom = 216.0
 rect_min_size = Vector2( 314, 350 )
 custom_constants/separation = 64
 __meta__ = {
@@ -89,7 +89,6 @@ margin_right = 314.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 3
-text = "Player"
 
 [node name="HBox2" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
 margin_top = 36.0
@@ -128,6 +127,7 @@ rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 
 [node name="HBox4" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
+visible = false
 margin_top = 108.0
 margin_right = 314.0
 margin_bottom = 140.0
@@ -146,6 +146,24 @@ rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 disabled = true
 
+[node name="HBox5" type="HBoxContainer" parent="Login/Panel/VBox/VBoxContainer"]
+margin_top = 108.0
+margin_right = 314.0
+margin_bottom = 140.0
+
+[node name="IPTxt" type="Label" parent="Login/Panel/VBox/VBoxContainer/HBox5"]
+margin_top = 8.0
+margin_right = 30.0
+margin_bottom = 24.0
+text = "IP: "
+
+[node name="IP" type="LineEdit" parent="Login/Panel/VBox/VBoxContainer/HBox5"]
+margin_left = 34.0
+margin_right = 314.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+
 [node name="JoinButton" type="Button" parent="Login/Panel/VBox"]
 margin_left = 132.0
 margin_top = 284.0
@@ -163,4 +181,5 @@ align = 1
 [connection signal="item_selected" from="Login/Panel/VBox/VBoxContainer/HBox2/Team" to="." method="_on_Team_item_selected"]
 [connection signal="item_selected" from="Login/Panel/VBox/VBoxContainer/HBox3/CharSel" to="." method="_on_CharSel_item_selected"]
 [connection signal="item_selected" from="Login/Panel/VBox/VBoxContainer/HBox4/Light" to="." method="_on_Light_item_selected"]
+[connection signal="text_changed" from="Login/Panel/VBox/VBoxContainer/HBox5/IP" to="." method="_on_IP_text_changed"]
 [connection signal="pressed" from="Login/Panel/VBox/JoinButton" to="." method="_on_JoinButton_pressed"]

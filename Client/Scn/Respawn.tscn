@@ -6,10 +6,14 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [node name="Cam" type="Camera2D"]
@@ -75,14 +79,24 @@ __meta__ = {
 [node name="Died" type="Label" parent="Respawn/CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -384.0
-margin_top = 229.115
-margin_right = 384.0
-margin_bottom = 293.115
+margin_left = -750.0
+margin_top = 118.147
+margin_right = 750.0
+margin_bottom = 374.147
+rect_min_size = Vector2( 1500, 256 )
 custom_fonts/font = SubResource( 1 )
-text = "OoF you got Shek'd"
+text = "Oof, you got Shek'd"
 align = 1
+valign = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MsgSwitch" type="Timer" parent="."]
+process_mode = 0
+wait_time = 4.5
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Respawn" to="Respawn" method="_on_Respawn_timeout"]
+[connection signal="timeout" from="MsgSwitch" to="." method="_on_MsgSwitch_timeout"]
