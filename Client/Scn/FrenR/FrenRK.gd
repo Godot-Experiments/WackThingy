@@ -10,6 +10,7 @@ var ammo := AMMO_MAX
 const WALK_FORCE = 600
 const WALK_MAX_SPEED = 800
 const JUMP_SPEED = 1600
+const DOWN_SPEED = 100
 const STOP_FORCE = 100
 const WALK_THRESH = WALK_FORCE * 0.2
 const MAX_JUMPS = 3
@@ -157,7 +158,7 @@ func _physics_process(delta):
 		rpc("p", position)
 
 	# Apply gravity.
-	velocity.y += gravity + d
+	velocity.y += gravity + d * DOWN_SPEED
 
 	# Move based on the velocity and snap to the ground.
 	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)

@@ -3,7 +3,7 @@ extends Node2D
 var vel : Vector2
 var rot : float
 
-var txts := ["OoF", "Ow", "Bruh", "I huRt", "WhY"]
+var txts := ["OoF", "oW", "BrUh", "I huRt", "WhY", "YoWcH", "StawP"]
 var txts_size := txts.size()
 onready var text_label = $Txt
 
